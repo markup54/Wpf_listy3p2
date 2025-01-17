@@ -1,0 +1,96 @@
+﻿<Window x:Class="Wpf_listy3p2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_listy3p2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <TabControl>
+        <TabItem Header="ControlBox">
+            <StackPanel>
+            <ItemsControl>
+                <Label>tekst 1</Label>
+                <Label>tekst 2</Label>
+                <Label>tekst 3</Label>
+                <Label>tekst 4</Label>
+            </ItemsControl>
+                <ItemsControl ItemsSource="{Binding slowa}"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="ListBox">
+            <StackPanel>
+                    
+                <Separator/>
+                <ListBox ItemsSource="{Binding slowa}"/>
+                <Separator/>
+                <ListBox ItemsSource="{Binding produkty}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Nazwa}"/>
+                                <Label Content="{Binding Cena}"/>
+                                <Label Content="{Binding Kategoria}"/>
+                                <CheckBox IsChecked="{Binding Dostepny}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            
+        </TabItem>
+        <TabItem Header="ListView">
+            <StackPanel>
+                <ListView>
+                    <ListViewItem>slowo1</ListViewItem>
+                    <ListViewItem>slowo2</ListViewItem>
+                    <ListViewItem>slowo3</ListViewItem>
+                </ListView>
+                
+                
+          
+            <ListView ItemsSource="{Binding slowa}"/>
+                <Separator Margin="20"/>
+                <ListView ItemsSource="{Binding produkty}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn
+                                Header="Nazwa produktu"
+                                DisplayMemberBinding="{Binding Nazwa}"/>
+                            <GridViewColumn
+                                Header="kategoria"
+                                DisplayMemberBinding="{Binding Kategoria}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle
+                        Height="20"
+                        Width="20"
+                        Fill="Green"/>
+                    <Label>DataGrid</Label>
+                </StackPanel>
+            </TabItem.Header>
+            <DataGrid ItemsSource="{Binding produkty}"
+                      CanUserAddRows="True"
+                      CanUserDeleteRows="False"
+                      RowBackground="BlanchedAlmond"
+                      AlternatingRowBackground="Azure"
+                      AlternationCount="3"
+                      AutoGenerateColumns="False"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="moja nazwa produktu" 
+                                        Binding="{Binding Nazwa}"/>
+                    <DataGridComboBoxColumn Header="kategoria" 
+                                            x:Name="datagridCombobox"
+                                            SelectedItemBinding="{Binding Kategoria}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+    </TabControl>
+</Window>
