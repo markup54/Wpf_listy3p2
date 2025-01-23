@@ -75,6 +75,7 @@
                     <Label>DataGrid</Label>
                 </StackPanel>
             </TabItem.Header>
+            <StackPanel>
             <DataGrid ItemsSource="{Binding produkty}"
                       CanUserAddRows="True"
                       CanUserDeleteRows="False"
@@ -89,8 +90,27 @@
                     <DataGridComboBoxColumn Header="kategoria" 
                                             x:Name="datagridCombobox"
                                             SelectedItemBinding="{Binding Kategoria}"/>
+                    <DataGridCheckBoxColumn
+                        Header="Czy produkt jest dostępny"
+                        Binding="{Binding Dostepny}"/>
                 </DataGrid.Columns>
             </DataGrid>
+                <UniformGrid Columns="2">
+                    <Label Content="Wpisz nazwę produktu"/>
+                    <TextBox x:Name="nazwaProduktuTextBox"/>
+                    <Label Content="Wybierz kategorię"/>
+                    <ComboBox x:Name="kategoriaComboBox"
+                              ItemsSource="{Binding kategorie}"/>
+                    <Label>Podaj cenę produktu</Label>
+                    <TextBox x:Name="cenaTextBox"/>
+                    <Label/>
+                    <CheckBox x:Name="czyDostepnyCheckBox">
+                        Czy produkt jest dostępny
+                    </CheckBox>
+                    <Label/>
+                    <Button Click="Button_Click_DodajProdukt">Dodaj produkt do listy</Button>
+                </UniformGrid>
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Window>

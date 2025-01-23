@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Wpf_listy3p2
     public partial class MainWindow : Window
     {
         public List<string> slowa { get; set; } = new List<string>();
-        public List<Produkt> produkty { get; set; } = new List<Produkt>()   ;
+        public ObservableCollection<Produkt> produkty { get; set; } = new ObservableCollection<Produkt>()   ;
 
         public List<string> kategorie { get; set; } = new List<string> { "pieczywo", "nabiał", "owoce", "warzywa" };
         public MainWindow()
@@ -36,6 +37,23 @@ namespace Wpf_listy3p2
             produkty.Add(new Produkt("gruszki", 8.99, true,  "owoce"));
             DataContext = this;
             datagridCombobox.ItemsSource = kategorie;
+        }
+
+        private void Button_Click_DodajProdukt(object sender, RoutedEventArgs e)
+        {
+            string nazwa = nazwaProduktuTextBox.Text;
+            string kategoria = kategoriaComboBox.Text;
+            bool czydostepny = czyDostepnyCheckBox.IsChecked == true ? true : false;
+            double cena = 0;
+            if(double.TryParse(cenaTextBox.Text, out cena))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("cena musi być liczbą, zapisano 0");
+            }
+            produkty.Add(new Produkt(nazwa, cena, czydostepny, kategoria));
         }
     }
 }
